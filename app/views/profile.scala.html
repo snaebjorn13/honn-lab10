@@ -1,0 +1,34 @@
+@(profileForm: Form[is.ru.honn.news.domain.User])
+
+@import helper._
+
+@main("Profile", nav = "profile") {
+    @helper.form(action = routes.UserController.submit) {
+        <fieldset>
+            <legend>Account information</legend>
+
+            @inputText(
+                profileForm("name"),
+                '_label -> "Name",
+                '_help -> "Please enter your name.",
+                '_error -> profileForm.globalError
+            )
+            @inputText(
+                profileForm("username"),
+                '_label -> "Username",
+                '_help -> "Please choose a valid username.",
+                '_error -> profileForm.globalError
+            )
+            @inputText(
+                profileForm("email"),
+                '_label -> "Email",
+                '_help -> "Enter a valid email address."
+            )
+        </fieldset>
+
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Update">
+            <a href="@routes.Application.index" class="btn">Cancel</a>
+        </div>
+    }
+}
