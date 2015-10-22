@@ -10,6 +10,7 @@ import play.mvc.*;
 import views.html.*;
 
 import static play.data.Form.form;
+import static play.libs.Json.toJson;
 
 /**
  * Created by Snaebjorn on 10/22/2015.
@@ -45,6 +46,17 @@ public class UserController extends Controller {
         service.updateUser(user);
 
         return ok(profile.render(updatedForm));
+    }
+
+    public Result getUser(String username) {
+        UserService service = (UserService) ctx.getBean("userService");
+
+        User user = service.getUser(username);
+        return ok(toJson(user));
+    }
+
+    public Result blankDetails() {
+        return ok(details.render());
     }
 
 }

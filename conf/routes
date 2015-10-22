@@ -3,15 +3,17 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.index()
+GET         /                       controllers.Application.index()
 
 #Sign up
-GET         /signup              controllers.SignupController.blank()
-POST        /signup              controllers.SignupController.submit()
+GET         /signup                 controllers.SignupController.blank()
+POST        /signup                 controllers.SignupController.submit()
 
 #Users
-GET         /users               controllers.UserController.blankProfile()
-POST        /users               controllers.UserController.submit()
+GET         /users                  controllers.UserController.blankProfile()
+POST        /users                  controllers.UserController.submit()
+GET         /users/:username        controllers.UserController.getUser(username: String)
+GET         /userinfo               controllers.UserController.blankDetails()
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file           controllers.Assets.versioned(path="/public", file: Asset)

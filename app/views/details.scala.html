@@ -1,0 +1,56 @@
+@main("User Information!", nav = "details") {
+    <script>
+        function getDetails() {
+            var xmlhttp = new XMLHttpRequest();
+            var username_input = document.getElementById("username_input");
+            var url = "http://localhost:9000/users/" + username_input.value;
+
+            xmlhttp.open('GET', url, true);
+            xmlhttp.send(null);
+            xmlhttp.onreadystatechange = function () {
+                var id = document.getElementById("id");
+                var name = document.getElementById("name");
+                var username = document.getElementById("username");
+                var email = document.getElementById("email");
+                var password = document.getElementById("password");
+                if (xmlhttp.status == 200) {
+                    var det = eval("(" + xmlhttp.responseText + ")");
+                    id.innerHTML = det.id;
+                    name.innerHTML = det.name;
+                    username.inerrHTML = det.username;
+                    email.innerHTML = det.email;
+                    password.innerHTML = det.password;
+                } else {
+                    alert("Error ->" + xmlhttp.responseText);
+                }
+            };
+        }
+    </script>
+
+    <form>
+        Username <input type="text" id="username_input" size="10"/>
+        <input type="button" value="Lookup User Details" onClick="getDetails()" />
+    </form>
+
+    <h2>Account details: </h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><div id="id"></div></td>
+                <td><div id="name"></div></td>
+                <td><div id="username"></div></td>
+                <td><div id="email"></div></td>
+                <td><div id="password"></div></td>
+            </tr>
+        </tbody>
+    </table>
+}
